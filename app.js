@@ -16,7 +16,8 @@ db.once('open', function() {
   var userSchema = mongoose.Schema({
     name: String,
     email: String,
-    created_at: Date
+    created_at: Date,
+    updated_at: Date
   });
 
   User = mongoose.model('User', userSchema);
@@ -50,7 +51,8 @@ app.post('/users', function(req, res) {
   new User({
     name: req.body.name,
     email: req.body.email,
-    created_at: new Date
+    created_at: new Date,
+    updated_at: new Date
   }).save(function(error, user) {
     if (error)
       res.json(error);
@@ -70,6 +72,24 @@ app.get('/users/:id', function(req, res) {
 });
 
 app.put('/users/:id', function(req, res) {
+  var id = req.params.id;
+  User.findById(id, function(error, user) {
+    if (req.body.name)
+      user.name = req.body.name;
+
+    if (req.body.email)
+      user.email = req.body.email;
+
+    user.updated_at = new Date;
+
+    user.save(function(error, user) {
+      if (error)
+        res.json(error);
+      else
+        res.json(user);
+    });
+
+  })
 });
 
 app.delete('/users/:id', function(req, res) {
