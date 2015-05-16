@@ -1,4 +1,4 @@
-var app = require('./app_config');
+var app = require('./config/app_config');
 
 var db_string = "mongodb://127.0.0.1/express_api_sample";
 var mongoose = require('mongoose').connect(db_string);
