@@ -38,6 +38,12 @@ app.get('/', function(req, res) {
 })
 
 app.get('/users', function(req, res) {
+  User.find({}, function(error, users) {
+    if (error)
+      res.json(error);
+    else
+      res.json(users);
+  });
 })
 
 app.post('/users', function(res, req) {
