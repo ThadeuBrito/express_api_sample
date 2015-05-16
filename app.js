@@ -63,4 +63,15 @@ app.put('/users/:id', function(req, res) {
 });
 
 app.delete('/users/:id', function(req, res) {
+  var id = req.params.id;
+  User.findById(id, function(error, user) {
+    if (error) {
+      res.json(error);
+    } else {
+      user.remove(function(error) {
+        if (!error)
+          res.json('User successfully removed!')
+      });
+    }
+  });
 });
