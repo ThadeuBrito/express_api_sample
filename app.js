@@ -1,5 +1,4 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+var app = require('./app_config');
 
 var db_string = "mongodb://127.0.0.1/express_api_sample";
 var mongoose = require('mongoose').connect(db_string);
@@ -21,17 +20,6 @@ db.once('open', function() {
   });
 
   User = mongoose.model('User', userSchema);
-});
-
-var app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-app.listen(3000, function(){
-  console.log('The server ir running in the port 3000');
 });
 
 app.get('/', function(req, res) {
