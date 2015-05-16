@@ -46,14 +46,21 @@ app.get('/users', function(req, res) {
   });
 })
 
-app.post('/users', function(res, req) {
+app.post('/users', function(req, res) {
 });
 
-app.get('/users/:id', function(res, req) {
+app.get('/users/:id', function(req, res) {
+  var id = req.params.id;
+  User.findById(id, function(error, user) {
+    if (error)
+      res.json(error);
+    else
+      res.json(user);
+  });
 });
 
-app.put('/users/:id', function(res, req) {
+app.put('/users/:id', function(req, res) {
 });
 
-app.delete('/users/:id', function(res, req) {
+app.delete('/users/:id', function(req, res) {
 });
