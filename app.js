@@ -47,6 +47,16 @@ app.get('/users', function(req, res) {
 })
 
 app.post('/users', function(req, res) {
+  new User({
+    name: req.body.name,
+    email: req.body.email,
+    created_at: new Date
+  }).save(function(error, user) {
+    if (error)
+      res.json(error);
+    else
+      res.json(user);
+  });
 });
 
 app.get('/users/:id', function(req, res) {
