@@ -5,10 +5,21 @@ var db_string = "mongodb://127.0.0.1/express_api_sample";
 var mongoose = require('mongoose').connect(db_string);
 var db = mongoose.connection;
 
+//MODELS
+var User;
+
 db.on('error', console.error.bind(console, 'Error connecting!'));
 
 db.once('open', function() {
   console.log('Mongo db connected!');
+
+  var userSchema = mongoose.Schema({
+    name: String,
+    email: String,
+    created_at: Date
+  });
+
+  User = mongoose.model('User', userSchema);
 });
 
 var app = express();
