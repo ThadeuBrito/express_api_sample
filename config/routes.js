@@ -18,7 +18,7 @@ module.exports = function(app) {
   });
 
   app.get('/users/:id', function(req, res) {
-    userController.show(req.params, function(response) {
+    userController.show(req, function(response) {
       res.json(response);
     });
   });
@@ -30,7 +30,7 @@ module.exports = function(app) {
   });
 
   app.delete('/users/:id', function(req, res) {
-    userController.delete(req.params, function(response) {
+    userController.delete(req, function(response) {
       res.json(response);
     });
   });

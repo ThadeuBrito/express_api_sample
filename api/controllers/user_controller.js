@@ -23,8 +23,8 @@ exports.create = function(req, callback) {
   });
 };
 
-exports.show = function(params, callback) {
-  db.User.findById(params.id, function(error, user) {
+exports.show = function(req, callback) {
+  db.User.findById(req.params.id, function(error, user) {
     if (error)
       callback(error);
     else
@@ -51,8 +51,8 @@ exports.update = function(req, callback) {
   });
 };
 
-exports.delete = function(params, callback) {
-  db.User.findById(params.id, function(error, user) {
+exports.delete = function(req, callback) {
+  db.User.findById(req.params.id, function(error, user) {
     if (error) {
       callback(error);
     } else {
