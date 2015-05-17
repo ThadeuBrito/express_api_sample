@@ -1,4 +1,5 @@
 var db = require('./db_config');
+var userController = require('../api/controllers/user_controller.js');
 
 module.exports = function(app) {
   app.get('/', function(req, res) {
@@ -6,11 +7,8 @@ module.exports = function(app) {
   })
 
   app.get('/users', function(req, res) {
-    db.User.find({}, function(error, users) {
-      if (error)
-        res.json(error);
-      else
-        res.json(users);
+    userController.index(function(response) {
+      res.json(response);
     });
   })
 
@@ -29,12 +27,8 @@ module.exports = function(app) {
   });
 
   app.get('/users/:id', function(req, res) {
-    var id = req.params.id;
-    db.User.findById(id, function(error, user) {
-      if (error)
-        res.json(error);
-      else
-        res.json(user);
+    userController.show(req.params, function(response) {
+      res.json(response);
     });
   });
 
