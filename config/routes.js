@@ -1,4 +1,3 @@
-var db = require('./db_config');
 var userController = require('../api/controllers/user_controller.js');
 
 module.exports = function(app) {
@@ -13,16 +12,8 @@ module.exports = function(app) {
   })
 
   app.post('/users', function(req, res) {
-    new db.User({
-      name: req.body.name,
-      email: req.body.email,
-      created_at: new Date,
-      updated_at: new Date
-    }).save(function(error, user) {
-      if (error)
-        res.json(error);
-      else
-        res.json(user);
+    userController.create(req, function(response) {
+      res.json(response);
     });
   });
 

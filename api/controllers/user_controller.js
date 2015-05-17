@@ -9,6 +9,20 @@ exports.index = function(callback) {
   });
 };
 
+exports.create = function(req, callback) {
+  new db.User({
+    name: req.body.name,
+    email: req.body.email,
+    created_at: new Date,
+    updated_at: new Date
+  }).save(function(error, user) {
+    if (error)
+      callback(error);
+    else
+      callback(user);
+  });
+};
+
 exports.show = function(params, callback) {
   db.User.findById(params.id, function(error, user) {
     if (error)
@@ -35,7 +49,7 @@ exports.update = function(req, callback) {
         callback(user);
     });
   });
-}
+};
 
 exports.delete = function(params, callback) {
   db.User.findById(params.id, function(error, user) {
@@ -48,4 +62,4 @@ exports.delete = function(params, callback) {
       });
     }
   });
-}
+};
